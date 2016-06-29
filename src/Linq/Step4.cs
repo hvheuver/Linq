@@ -23,7 +23,14 @@ namespace Linq
             PrintCollection("Lengte van de namen van de steden:", cityLengths);
 
             // transformatie van Location-s naar CityDistance-s, object initializer
-            IEnumerable<CityDistance> cityDistances = null;
+            IEnumerable<CityDistance> cityDistances = placesVisited.Select(
+                     c => new CityDistance
+                     {
+                         Name = c.City,
+                         Country = c.Country,
+                         DistanceInKm = (int)(c.Distance * 1.61)
+                     });
+
             PrintCollection("Afstanden in km:", cityDistances);
             Console.WriteLine();
 
@@ -49,7 +56,7 @@ namespace Linq
             if (!cities.Any())
                 Console.WriteLine("geen steden...");
             else
-                foreach (var c in cities)  
+                foreach (var c in cities)
                     Console.WriteLine(c);
             Console.WriteLine();
         }
